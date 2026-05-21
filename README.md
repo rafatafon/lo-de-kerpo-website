@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lo de Kerpo — Website
+
+Official website for [Lo de Kerpo Asados y Más](https://www.google.com/maps/place/Lo+de+Kerpo+Asados+y+Mas), the grill restaurant by Chef Kerpo. Two locations: Comayagua (original) and Tegucigalpa (new branch, opened 2026).
+
+Built and maintained by [Archimedes Systems](https://archimedes.systems).
+
+---
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Deployment:** [Vercel](https://vercel.com/)
+- **Reservations:** OpenTable widget integration
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20 or later
+- [pnpm](https://pnpm.io/) 9 or later
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/<your-org>/lo-de-kerpo-website.git
+cd lo-de-kerpo-website
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy `.env.example` to `.env.local` and fill in your values:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cp .env.example .env.local
+```
 
-## Learn More
+Required variables:
 
-To learn more about Next.js, take a look at the following resources:
+| Variable                      | Description                                  |
+| ----------------------------- | -------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`        | Production site URL (e.g. https://lodekerpo.com) |
+| `NEXT_PUBLIC_OPENTABLE_RID`   | OpenTable restaurant ID for the reservation widget |
+| `NEXT_PUBLIC_GA_ID`           | Google Analytics measurement ID (optional)   |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running Locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev      # Start dev server at http://localhost:3000
+pnpm build    # Production build
+pnpm start    # Run production build locally
+pnpm lint     # Run ESLint
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+.
+├── app/                  # Next.js App Router pages
+│   ├── page.tsx          # Home
+│   ├── menu/             # Menu
+│   ├── historia/         # Brand story
+│   ├── sucursales/       # Both branches (Comayagua + Tegucigalpa)
+│   ├── galeria/          # Photo gallery
+│   ├── reservas/         # Reservations (OpenTable widget)
+│   ├── layout.tsx
+│   └── globals.css
+├── components/           # Shared React components
+├── lib/                  # Utilities, constants
+├── content/              # Menu data, branch info (static)
+├── public/               # Static assets, images
+└── README.md
+```
+
+---
+
+## Content Updates
+
+Menu items, branch info, and copy live in `content/` as static data files. To update:
+
+1. Edit the relevant file in `content/`.
+2. Commit and push to `main`.
+3. Vercel deploys the change automatically.
+
+For new photography, drop images into `public/images/` and reference them from the relevant content file.
+
+---
+
+## Deployment
+
+The site auto-deploys to Vercel on push to `main`.
+
+- **Production:** `https://lodekerpo.com` (or your production domain)
+- **Preview:** Each pull request gets its own preview URL.
+
+To deploy manually:
+
+```bash
+pnpm build
+vercel --prod
+```
+
+---
+
+## Brand Notes
+
+- **Voice & tone:** Warm, family-owned, Honduran hospitality. Chef-driven storytelling — Chef Kerpo is central to the brand.
+- **Audience:** Local diners in Comayagua and Tegucigalpa, plus visitors discovering the restaurant for the first time.
+- **Language:** Spanish (neutral Latin American). English secondary if added later.
+
+---
+
+## License
+
+Proprietary. All rights reserved to Lo de Kerpo Asados y Más.
+
+---
+
+Built by [Archimedes Systems](https://archimedes.systems) · [hello@archimedes.systems](mailto:hello@archimedes.systems)
